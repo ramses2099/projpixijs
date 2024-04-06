@@ -587,15 +587,23 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 var _pixiJs = require("pixi.js");
 // Asynchronous IIFE
 (async ()=>{
-    // Create a PixiJS application.
     const app = new _pixiJs.Application();
-    // Intialize the application.
     await app.init({
         background: "#1099bb",
         resizeTo: window
     });
-    // Then adding the application's canvas to the DOM body.
     document.body.appendChild(app.canvas);
+    const { stage } = app;
+    const texture = await _pixiJs.Assets.load("img/ship_E.png");
+    const ship = new _pixiJs.Sprite(texture);
+    stage.addChild(ship);
+    ship.anchor.set(0.5);
+    ship.x = app.screen.width / 2;
+    ship.y = app.screen.height / 2;
+    // game loop
+    app.ticker.add((time)=>{
+        ship.rotation += 0.1 * time.deltaTime;
+    });
 })();
 
 },{"pixi.js":"1arn0"}],"1arn0":[function(require,module,exports) {

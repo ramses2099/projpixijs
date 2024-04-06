@@ -3,8 +3,12 @@
   "source": "src/index.html",
   "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
-    "start": "parcel src/index.html",
-    "build": "parcel build"
+    "clean-dist": "rmdir /s /q dist && mkdir dist && mkdir dist\\img",
+    "copy-img": "copy src\\img\\ dist\\img",
+    "copy-files": "npm run copy-img",
+    "init": "npm run clean-dist && npm run copy-files",
+    "start": "npm run init && parcel src/index.html",
+    "build": "npm run init && parcel build src/index.html"
   },
   "devDependencies": {
     "parcel": "^2.12.0"
